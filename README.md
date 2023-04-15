@@ -78,7 +78,7 @@
         tf plan
         tf apply --auto-approve
  
-    Change to the below mentioned directory. 
+    Change to the below mentioned directory
         ACS730_FinalProject/environment/prod/webserver/
         tf init
         tf fmt
