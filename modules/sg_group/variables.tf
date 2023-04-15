@@ -18,7 +18,7 @@ variable "prefix" {
 variable "cloud_private_ip" {
   default     = "172.31.43.159"
   type        = string
-  description = "PRIVATE IP OF CLOUD9"
+  description = "public ip of cloud9"
 }
 
 
@@ -26,7 +26,7 @@ variable "cloud_private_ip" {
 variable "cloud_public_ip" {
   default     = "3.81.138.136"
   type        = string
-  description = "public IP OF CLOUD9"
+  description = "public ip of cloud9"
 }
 
 

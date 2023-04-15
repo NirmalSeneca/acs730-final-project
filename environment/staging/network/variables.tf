@@ -26,7 +26,7 @@ variable "env" {
 
 # VPC CIDR range
 variable "vpc_cidr" {
-  default     = "10.200.0.0/16"
+  default     = "10.300.0.0/16"
   type        = string
   description = "VPC for Dev environment"
 }
@@ -44,7 +44,7 @@ variable "instance_count" {
 
 # Provision public subnets in VPC
 variable "public_subnet_cidrs" {
-  default     = ["10.200.1.0/24", "10.200.2.0/24", "10.200.3.0/24"]
+  default     = ["10.300.1.0/24", "10.300.2.0/24", "10.300.3.0/24"]
   type        = list(string)
   description = "Public Subnet CIDRs"
 }
@@ -53,7 +53,7 @@ variable "public_subnet_cidrs" {
 
 # Provision private subnets in VPC
 variable "private_subnet_cidrs" {
-  default     = ["10.200.4.0/24", "10.200.5.0/24", "10.200.6.0/24"]
+  default     = ["10.300.4.0/24", "10.300.5.0/24", "10.300.6.0/24"]
   type        = list(string)
   description = "Private Subnet CIDRs"
 }
