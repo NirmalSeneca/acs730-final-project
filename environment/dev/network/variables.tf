@@ -59,12 +59,12 @@ variable "private_subnet_cidrs" {
 variable "instance_count" {
   default     = 2
   type        = string
-  description = "Dev Environment Instances Count"
+  description = "Devevlopment Environment Instances Count"
 }
 
 # ASG Instance Type
 variable "type" {
   default     = "t3.micro"
   type        = string
-  description = "Dev Environment Instances Type"
+  description = "Development Environment Instances Type"
 }
