@@ -7,7 +7,7 @@ locals {
 }
 
 
-# Security Group for Load balancer   ccccc
+# Security Group for Load balancer
 resource "aws_security_group" "lb_sg" {
   name        = "allow_http"
   description = "Allow HTTP inbound traffic"
@@ -65,7 +65,7 @@ data "terraform_remote_state" "network" {
 
 
 
-# Security Group for Bastion VM
+# Security Group of Bastion VM
 resource "aws_security_group" "sg_bastion" {
   name        = "allow_ssh_bastion"
   description = "Allow SSH inbound traffic"
@@ -96,7 +96,7 @@ resource "aws_security_group" "sg_bastion" {
   )
 }
 
-# Retrieve global variables from the Terraform module
+# Retrieve global variables
 module "globalvars" {
   source = "/home/ec2-user/environment/ACS730-Group12-Project/modules/globalvars"
 }

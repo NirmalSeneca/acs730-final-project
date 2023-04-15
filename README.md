@@ -3,6 +3,7 @@
 
     link to our git repository https://github.com/NirmalSeneca/acs730-final-project.git
 
+    Video Link:- https://seneca-my.sharepoint.com/:v:/g/personal/nmpanchal2_myseneca_ca/EUBpiP6KMzdBsC8BjBOpizMBMsSXfV19i4X3sbWbRGq8AQ?e=JOIpCd
     Step 1: Create 3 bucket for each environment
 
             dev-group12-project  for dev environment
