@@ -65,7 +65,7 @@ resource "aws_instance" "bastion" {
 }
 
 
-# Adding SSH key to Amazon EC2   ccccc
+# Adding SSH key to Amazon EC2  
 resource "aws_key_pair" "web_key" {
   key_name   = local.name_prefix
   public_key = file("${local.name_prefix}.pub")
