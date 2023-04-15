@@ -29,10 +29,7 @@ data "terraform_remote_state" "network" {
 }
 
 
-
-
-
-# Application Load Balancer ccccc
+# Application Load Balancer 
 resource "aws_lb" "alb" {
   name                       = "${var.env}-load-balancer"
   internal                   = false
@@ -41,19 +38,23 @@ resource "aws_lb" "alb" {
   subnets                    = data.terraform_remote_state.network.outputs.public_subnet_id[*]
   enable_deletion_protection = false
   
-  
-   
-
   tags = {
      "Name" = "${local.name_prefix}-alb"
   }
 }
 
 
+resource "aws_lb_listener" "lb_listener_http" {
+  load_balancer_arn = aws_lb.alb.id
+  port              = "80"
+  protocol          = "HTTP"
+  default_action {
+    target_group_arn = aws_lb_target_group.group.id
+    type             = "forward"
+  }
+}
 
-
-
-# Load balancer target group  cccccc
+# Load balancer target group  
 resource "aws_lb_target_group" "group" {
   name     = "${var.env}-loadbalancer-targetgroup"
   port     = 80
@@ -71,16 +72,3 @@ resource "aws_lb_target_group" "group" {
 }
 
 
-
-
-
-
-resource "aws_lb_listener" "lb_listener_http" {
-  load_balancer_arn = aws_lb.alb.id
-  port              = "80"
-  protocol          = "HTTP"
-  default_action {
-    target_group_arn = aws_lb_target_group.group.id
-    type             = "forward"
-  }
-}

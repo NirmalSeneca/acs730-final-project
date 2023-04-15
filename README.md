@@ -1,47 +1,44 @@
 
 # ACS730_Group12_Project
 
-    link for our git repository https://github.com/NirmalSeneca/acs730-final-project.git
+    link to our git repository https://github.com/NirmalSeneca/acs730-final-project.git
 
-        --------------------------------------------------<!-- CREATION OF BUCKET -->-------------------------------
-    Create 3 bucket for 3 environment
+    Step 1: Create 3 bucket for each environment
 
-        dev-group12-project        <dev env>
-        staging-group12-project   <staging env>
-        prod-group12-project      <prod env>
+            dev-group12-project  for dev environment
+            staging-group12-project for staging environement
+            prod-group12-project  for prod environment
 
-    Upload the below mentioned photos in each bucket (format should be in .jpeg)
+    Step 2: We need to upload the photos in each s3 bucket(format should be in .jpeg)
     
-        dafodil.jpeg
-        daisy.jpeg
-        hibiscus.jpeg
-        lilly.jpeg
-        rose.jpeg
-        tulip.jpeg
+    blackclover.jpeg
+    bluelock.jpeg
+    bleach.jpeg
+    onepiece.jpeg
+    naruto.jpeg
+    demonslayer.jpeg   
 
-    --------------------------------------<!-- CREATION OF SSH KEY  -->----------------------------------
-    Generate 3 ssh key for different environments using below mentioned command in the webserver part of each environment
+    Step 3: Generate 3 ssh key for different environments using below mentioned command in the webserver part of each environment
 
         ssh-keygen -t rsa -f Group12-dev
         ssh-keygen -t rsa -f Group12-staging
         ssh-keygen -t rsa -f Group12-prod
 
-        --------------------------------------------------<!-- DEPLOYMENT -->--------------------------------------------------
-    Once bucket is created we have to provision and do the deployment for 3 environment 
-    We started deploying step by step  first with the dev environment and moved to the network part and run the terraform command there and after that to the webserver part using same command below:-
+    Step 4: 
+    Once bucket is created we will deploy the environment dev stage and prod one by one so that we can provisioned the infrastructure as asked in the assignment
     
-    Note: the Private and Public IP for of the webserver for CLoud9 environment in dev, staging and prod environment must be updated before running terraform
-         ACS730FinalProject/environment/dev/network/
+    Step 5: 
+    We need to update the private and public ip address of the cloud9 environment in varibles.tf folder in webserver in each environment
 
         alias tf=terraform
-        tf init = Which will initialize Terraform configuration files inside the ACS730_Group7_Project directory
-        tf fmt = Used to reformat Terraform configuration files in a standard manner
-        tf validate =Validates the configuration files in a directory
-        tf plan = Preview the Terraform actions that are changed which you can apply later
-        tf apply --auto-approve =As per the dependency on configuration files this commands helps in creating or updating infrastructures 
+        tf init 
+        tf fmt 
+        tf validate 
+        tf plan 
+        tf apply --auto-approve 
 
-    Change to the below mentioned directory.
-        ACS730FinalProject/environment/dev/webserver/
+    Change the directory to.
+        ACS730-Final-Project/environment/dev/webserver/
         tf init
         tf fmt
         tf validate
@@ -49,36 +46,32 @@
         tf apply --auto-approve
 
 
-    Once deployment in dev is success we will apply same code in staging environment for network and webserver
-    Change to the below mentioned directory. 
+   If successfully deployed on dev we will run it on staging and prod
 
-        ACS730FinalProject/environment/staging/network/
+        ACS730-Final-Project/environment/staging/network/
         tf init
         tf fmt
         tf validate
         tf plan
         tf apply --auto-approve
 
-    Change to the below mentioned directory.
-        ACS730FinalProject/environment/staging/webserver/
+   Change the directory to.
+        ACS730-Final-Project/environment/staging/webserver/
+        tf init
+        tf fmt
+        tf validate
+        tf plan
+        tf apply --auto-approve
+ .
+    Change the directory to.
+        ACS730-Final-Project/environment/prod/network/
         tf init
         tf fmt
         tf validate
         tf plan
         tf apply --auto-approve
  
- 
-    At last we will be approaching prod environment and apply same command 
-    Change to the below mentioned directory.
-
-        ACS730_FinalProject/environment/prod/network/
-        tf init
-        tf fmt
-        tf validate
-        tf plan
-        tf apply --auto-approve
- 
-    Change to the below mentioned directory
+    Change the directory to.
         ACS730_FinalProject/environment/prod/webserver/
         tf init
         tf fmt
@@ -87,23 +80,22 @@
         tf apply --auto-approve
 
 
-    --------------------------------------------------<!-- TERRAFORM DESTROY -->--------------------------------------------------
-    Once it is successful we will be now destroying the terraform configuration
-    the destroying process will be in following order
+    Step 6:
+    We can destroy the infra using the commands below
 
-        ACS730_FinalProject/environment/prod/webserver/
+        ACS730-Final-Project/environment/prod/webserver/
         tf destroy --auto-approve 
-        ACS730_FinalProject/environment/prod/network/
+        ACS730-Final-Project/environment/prod/network/
         tf destroy --auto-approve 
 
-        ACS730_FinalProject/environment/staging/webserver/
+        ACS730-Final-Project/environment/staging/webserver/
         tf destroy --auto-approve 
         ACS730_FinalProject/environment/staging/network/
         tf destroy --auto-approve 
 
-        ACS730_FinalProject/environment/dev/webserver/
+        ACS730-Final-Project/environment/dev/webserver/
         tf destroy --auto-approve 
-        ACS730_FinalProject/environment/dev/network/
+        ACS730-Final-Project/environment/dev/network/
         tf destroy --auto-approve 
 
    

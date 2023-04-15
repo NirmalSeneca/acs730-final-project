@@ -10,6 +10,10 @@ provider "aws" {
 # Use remote state to retrieve the data
 data "terraform_remote_state" "network" {
   backend = "s3"
+
+
+
+  
   config = {
     bucket = "${var.env}-group12-project"
     key    = "${var.env}-network/terraform.tfstate"
@@ -60,21 +64,11 @@ resource "aws_autoscaling_group" "asg_bar" {
 
 
 
-#Creating Scaling policy for AutoScaling Groupc combined CPU usage of all the instances  less then  or equal 5% 
-resource "aws_autoscaling_policy" "asg_policy5_down" {
-  name                   = "${local.name_prefix}-asg_policy_down"
-  autoscaling_group_name = aws_autoscaling_group.asg_bar.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = -1
-  cooldown               = 300
-}
-
-
 
 
 #Creating an alarm metric when combined CPU usage of all the instances  less then  or equal 5% 
 resource "aws_cloudwatch_metric_alarm" "metric_asg_policy_down" {
-  alarm_description   = "CPU usage of all the instances  less then  or equal 5% "
+  alarm_description   = "CPU usage less then  or equal 5% "
   alarm_actions       = [aws_autoscaling_policy.asg_policy5_down.arn]
   alarm_name          = "${local.name_prefix}_scale_down"
   comparison_operator = "LessThanOrEqualToThreshold"
@@ -85,10 +79,17 @@ resource "aws_cloudwatch_metric_alarm" "metric_asg_policy_down" {
   period              = "120"
   statistic           = "Average"
 
+
+
   dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.asg_bar.name
+
+
   }
 }
+
+
+
 
 
 
@@ -103,9 +104,23 @@ resource "aws_autoscaling_policy" "asg_policy10_up" {
 }
 
 
+
+
+
+#Creating Scaling policy for AutoScaling Groupc combined CPU usage of all the instances  less then  or equal 5% 
+resource "aws_autoscaling_policy" "asg_policy5_down" {
+  name                   = "${local.name_prefix}-asg_policy_down"
+  autoscaling_group_name = aws_autoscaling_group.asg_bar.name
+  adjustment_type        = "ChangeInCapacity"
+  scaling_adjustment     = -1
+  cooldown               = 300
+}
+
+
+
 #Creating an alarm metric when combined CPU usage of all the instances  reaches or greater  10% 
 resource "aws_cloudwatch_metric_alarm" "metric_asg_policy10_up" {
-  alarm_description   = " CPU usage of all the instances  reaches or greater  10%"
+  alarm_description   = " CPU usage reaches or greater  10%"
   alarm_actions       = [aws_autoscaling_policy.asg_policy10_up.arn]
   alarm_name          = "${local.name_prefix}_scale_up"
   comparison_operator = "GreaterThanOrEqualToThreshold"
@@ -115,6 +130,9 @@ resource "aws_cloudwatch_metric_alarm" "metric_asg_policy10_up" {
   evaluation_periods  = "2"
   period              = "120"
   statistic           = "Average"
+
+
+
 
   dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.asg_bar.name

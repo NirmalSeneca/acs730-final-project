@@ -7,31 +7,16 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-# Retrieve global variables from the Terraform module
 module "globalvars" {
   source = "/home/ec2-user/environment/ACS730-Group12-Project/modules/globalvars"
 }
 
 
-# Define tags locally
 locals {
   default_tags = merge(var.default_tags, { "env" = var.env })
   name_prefix  = "${var.prefix}-${var.env}"
  
 }
-
-
-# Create VPC 
-resource "aws_vpc" "main" {
-  cidr_block       = var.vpc_cidr
-  instance_tenancy = "default"
-  tags = merge(
-    local.default_tags, {
-      Name = "${local.name_prefix}-VPC"
-    }
-  )
-}
-
 
 
 # Add public subnets
@@ -47,6 +32,17 @@ resource "aws_subnet" "public_subnet" {
   )
 }
 
+
+# Create VPC 
+resource "aws_vpc" "main" {
+  cidr_block       = var.vpc_cidr
+  instance_tenancy = "default"
+  tags = merge(
+    local.default_tags, {
+      Name = "${local.name_prefix}-VPC"
+    }
+  )
+}
 # Add private subnets
 resource "aws_subnet" "private_subnet" {
   count             = length (var.private_subnet_cidrs)

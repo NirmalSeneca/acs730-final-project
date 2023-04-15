@@ -6,26 +6,6 @@ locals {
   name_prefix  = "${local.prefix}-${var.env}"
 }
 
-# Retrieve global variables from the Terraform module
-module "globalvars" {
-  source = "/home/ec2-user/environment/ACS730-Group12-Project/modules/globalvars"
-}
-
-
-# Use remote state to retrieve the data
-data "terraform_remote_state" "network" {
-  backend = "s3"
-  config = {
-    bucket = "${var.env}-group12-project"
-    key    = "${var.env}-network/terraform.tfstate"
-    region = "us-east-1"
-  }
-}
-
-
-
-
-
 
 # Security Group for Load balancer   ccccc
 resource "aws_security_group" "lb_sg" {
@@ -71,6 +51,20 @@ resource "aws_security_group" "lb_sg" {
 
 
 
+# Use remote state to retrieve the data
+data "terraform_remote_state" "network" {
+  backend = "s3"
+  config = {
+    bucket = "${var.env}-group12-project"
+    key    = "${var.env}-network/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+
+
+
+
 # Security Group for Bastion VM
 resource "aws_security_group" "sg_bastion" {
   name        = "allow_ssh_bastion"
@@ -101,3 +95,9 @@ resource "aws_security_group" "sg_bastion" {
     }
   )
 }
+
+# Retrieve global variables from the Terraform module
+module "globalvars" {
+  source = "/home/ec2-user/environment/ACS730-Group12-Project/modules/globalvars"
+}
+

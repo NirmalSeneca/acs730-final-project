@@ -5,7 +5,6 @@ variable "default_tags" {
   description = "Default tags to be appliad to all AWS resources"
 }
 
-# Name prefix
 variable "prefix" {
  
   type        = string
@@ -18,6 +17,7 @@ variable "prefix" {
 # Variable to signal the current environment 
 variable "env" {
 
+
   type        = string
   description = "dev environment"
 }
@@ -26,8 +26,10 @@ variable "env" {
 
 
 
-# VPC CIDR range
 variable "vpc_cidr" {
+
+
+  
   type        = string
   description = "VPC for dev environment"
 }
