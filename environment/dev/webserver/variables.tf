@@ -16,7 +16,7 @@ variable "env" {
 variable "cloud_private_ip" {
   default     = "172.31.43.159"
   type        = string
-  description = "PRIVATE IP OF CLOUD9"
+  description = "Private ip address of Cloud9"
 }
 
 
@@ -24,7 +24,7 @@ variable "cloud_private_ip" {
 variable "cloud_public_ip" {
   default     = "3.81.138.136"
   type        = string
-  description = "public IP OF CLOUD9"
+  description = "Public ip address of Cloud9"
 }
 
 # Minimum Size for the auto scaling group based on environment
